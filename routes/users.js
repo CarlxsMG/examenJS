@@ -11,6 +11,21 @@ router.get('/add', function(req, res, next) {
 })
 
 router.post('/add', function(req, res, next) {
+
+  const { name, lastname, password, email } = req.body;
+
+  const newUser = {
+    name,
+    lastname,
+    password,
+    email,
+  };
+
+  // newUser.password = encryptPass(password);
+
+  pool.query("INSERT INTO users SET ? ", [newUser]);
+
+  console.log(newUser);
   console.log(req.body)
   res.redirect('/users')
 })
