@@ -1,9 +1,11 @@
-<section style="margin-top: 2rem;">
-    {# each users}
-        <div>
-            <p>Nombre</p>
-            <p>Apellidos</p>
-            <p>Email</p>
+<section style="margin-top: 2rem; display: grid; gap: 1rem;">
+    {{#each query}}
+        <div style="border: 1px solid #ccc; border-radius: 4px; display: flex; gap: 1rem; padding: 1rem; align-items: center;">
+            <p>Nombre: {{name}}</p>
+            <p>Apellidos: {{lastname}}</p>
+            <p>Email: {{email}}</p>
+            <a href="/users/edit/{{id}}" style="border: 0; background: orange; font-weight: bold; color: #fff; padding: .5rem 1rem; border-radius: 4px; text-decoration: none;">Editar</a>
+            <a href="/users/delete/{{id}}" style="border: 0; background: red; font-weight: bold; color: #fff; padding: .5rem 1rem; border-radius: 4px; text-decoration: none;">Borrar</a>
         </div>
-    {/each}
+    {{/each}}
 </section>

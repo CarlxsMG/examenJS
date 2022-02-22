@@ -4,7 +4,7 @@ module.exports = {
         host: 'localhost',
         user: 'root',
         password: '',
-        database: 'db_examen'
+        database: 'examen_db'
     },
 
     db_prod: {

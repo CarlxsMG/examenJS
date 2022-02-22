@@ -2,7 +2,7 @@ const mysql = require("mysql");
 const { promisify } = require("util");
 
 const { db_dev, db_prod } = require("./databases");
-const db;
+let db;
 
 if (process.env.NODE_ENV === "prod") {
     db = db_prod;
