@@ -1,0 +1,1 @@
+var encrypt = require('bcryptjs')
