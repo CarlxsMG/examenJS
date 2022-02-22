@@ -7,13 +7,13 @@ var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 
-var dotEnv = require('dotenv');
-dotEnv.config()
+const hbs = require('hbs')
+hbs.registerPartials(__dirname + '/views/templates')
+
+require('dotenv').config();
 
 var app = express();
 
-const hbs = require('hbs');
-hbs.registerPartials(__dirname + '/views/templates')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
