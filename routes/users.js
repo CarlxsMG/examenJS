@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 const pool = require("../db");
-// const { encryptPass } = require("../helpers/helpers");
+const { encryptPass, checkPass } = require("../helpers/helpers");
 
 /* GET users listing. */
 router.get('/', async function(req, res, next) {
@@ -10,6 +10,17 @@ router.get('/', async function(req, res, next) {
   
   res.render('users_list', {query});
 });
+
+router.post('/login', async function(req, res, next) {
+  const { email, password } = req.body;
+
+  let queryUser = await pool.query('SELECT * FROM users WHERE email=?', [email])
+
+  if(checkPass(queryUser[0].password, password)) {
+    let query = await pool.query('SELECT * FROM users')
+    res.render('users_list', {query});
+  }
+})
 
 router.get('/add', function(req, res, next) {
   res.render('users_add')
@@ -19,14 +30,14 @@ router.post('/add', function(req, res, next) {
 
   const { name, lastname, password, email } = req.body;
 
+  let newPass = encryptPass(password);
+
   const newUser = {
     name,
     lastname,
-    password,
+    password:newPass,
     email,
   };
-
-  // newUser.password = encryptPass(password);
 
   pool.query("INSERT INTO users SET ? ", [newUser]);
 
@@ -47,10 +58,12 @@ router.post('/edit/:id', function(req, res, next) {
   const { name, lastname, password, email } = req.body;
   const { id } = req.params;
 
+  let newPass = encryptPass(password);
+
   const newUser = {
     name,
     lastname,
-    password,
+    password:newPass,
     email,
   };
 

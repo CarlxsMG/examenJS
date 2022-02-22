@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 
 const pool = require("../db");
-// const { encryptPass } = require("../helpers/helpers");
 
 /* GET users listing. */
 
